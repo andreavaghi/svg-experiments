@@ -5,8 +5,28 @@
 	<title>SVG Experiments</title>
 </head>
 <body>
-	<svg width="300" height="300">
-		<path d="M 100 100 L 200 100 L 200 200 L 100 200 Z" style="stroke: #3333cc; fill: #3333aa;" transform="rotate(45 150 150)" />
-	</svg>
+	<object data="square.svg" type="image/svg+xml" class="square"></object>
+	<object data="square.svg" type="image/svg+xml" class="square"></object>
+	<object data="square.svg" type="image/svg+xml" class="square"></object>
+	<object data="square.svg" type="image/svg+xml" class="square"></object>
+	<object data="square.svg" type="image/svg+xml" class="square"></object>
+	<script>
+	var svg = document.getElementsByClassName('square');
+	console.log(svg[0]);
+	var deg = 0;
+	setInterval(function(){
+		deg += 1;
+		for(var i = 0; i < svg.length; i++) {
+			var path = svg[i].contentDocument.getElementsByTagName('path');
+			if(i%2 === 0) {
+				path[0].setAttribute('transform', 'rotate(' + deg%360 + ' 75 75)');
+				path[0].setAttribute('fill', 'rgb(51,170,' + deg%255 + ')');
+			} else {
+				path[0].setAttribute('transform', 'rotate(-' + deg%360 + ' 75 75)');
+				path[0].setAttribute('fill', 'rgb(51,170,' + deg%255 + ')');
+			}
+		}
+	}, 1000/24);
+	</script>
 </body>
 </html>
